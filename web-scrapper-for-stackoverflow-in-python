@@ -1,5 +1,5 @@
 ''''
-Project Name: Python Scrapper 
+Project Name: Python Scrapper
 Description: Python web scrapper application to scrape jobs from stackoveflow. This application will scrape job details from
 stackoveflow and save on the csv file.
 Author: Madhav Dhungana
@@ -76,9 +76,9 @@ def job_link(doc):
     return joblink
 
 
+alljoblist = []
 
-
-for test in range(0, 15):
+for test in range(0, 2):
     print(f'Getting page {test} ')
     doc = page(1)
     topics = job_title(doc)
@@ -87,17 +87,20 @@ for test in range(0, 15):
     skills = required_skills(doc)
     url = job_link(doc)
 
-joblist_dict = {
-    'Job Title': topics,
-    'Company': company,
-    'Location': location,
-    'Skills': skills,
-    'Job Link': url,
-}
+    joblist_dict = {
+        'Job Title': topics,
+        'Company': company,
+        'Location': location,
+        'Skills': skills,
+        'Job Link': url,
+    }
+    alljoblist.append(joblist_dict)
 
-alljoblist = []
-alljoblist.append(joblist_dict)
+
+
+print(alljoblist)
+
+
 
 job_df = pd.DataFrame(alljoblist)
 job_df.to_csv('joblist.csv', encoding='utf-8')
-
